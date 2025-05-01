@@ -180,18 +180,18 @@ public class Sorting {
             radix.put(i,new ArrayList<>());
         }
         Integer maximum=Collections.max(sorted);
-        Integer maxRadix=0;
+        int maxRadix=0;
         while(maximum!=0)
         {
             maximum=maximum/10;
             maxRadix+=1;
         }
-        Integer modular=0;
+        int modular=0;
         while(modular<maxRadix) {
             Integer divisor= (int) Math.pow(10,modular);
             modular+=1;
             for (Integer number : sorted) {
-                Integer tempNumber=number/divisor;
+                int tempNumber=number/divisor;
                 tempNumber=tempNumber%10;
                 radix.get(tempNumber).add(number);
             }
