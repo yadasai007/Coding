@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StringHandling {
-    public static ArrayList<String> getUnique(String string)
+    public static ArrayList<String> getUnique(String[] words)
     {
         ArrayList<String> unique=new ArrayList<>();
         HashMap<String,Integer> wordCount=new HashMap<>();
-        String[] words=string.split(" ");
         for(String word:words)
         {
             if(wordCount.containsKey(word))
@@ -23,11 +22,10 @@ public class StringHandling {
         }
         return unique;
     }
-    public static ArrayList<String> getDuplicate(String string)
+    public static ArrayList<String> getDuplicate(String[] words)
     {
         ArrayList<String> duplicates=new ArrayList<>();
         HashMap<String,Integer> wordCount=new HashMap<>();
-        String[] words=string.split(" ");
         for(String word:words)
         {
             if(wordCount.containsKey(word))
@@ -43,10 +41,9 @@ public class StringHandling {
         return duplicates;
     }
 
-    public static ArrayList<String> getWords(String string)
+    public static ArrayList<String> getWords(String[] splitWords)
     {
         ArrayList<String> words=new ArrayList<>();
-        String[] splitWords=string.split(" ");
         for(String word:splitWords)
         {
             if(words.contains(word))
@@ -56,10 +53,9 @@ public class StringHandling {
 
         return words;
     }
-    public static HashMap<String,Integer> getWordsCount(String string)
+    public static HashMap<String,Integer> getWordsCount(String[] words)
     {
         HashMap<String,Integer> wordCount=new HashMap<>();
-        String[] words=string.split(" ");
         for(String word:words)
         {
             if(wordCount.containsKey(word))
@@ -69,15 +65,44 @@ public class StringHandling {
         }
         return wordCount;
     }
+
+    public static String getLongWord(String[] words)
+    {
+        String maxLengthWord="";
+        int maxLength=0;
+        for(String word:words)
+        {
+            if(word.length()>maxLength)
+            {
+                maxLengthWord=word;
+                maxLength=word.length();
+            }
+            else if(word.length()==maxLength)
+            {
+                if(word.compareTo(maxLengthWord)<0)
+                {
+                    maxLengthWord=word;
+                }
+            }
+        }
+        return maxLengthWord;
+    }
+
     public static void main(String[] args) {
         String string="Hello world hello world java world";
-        ArrayList<String> uniqueWords=StringHandling.getUnique(string);
-        ArrayList<String> duplicateWords =StringHandling.getDuplicate(string);
-        ArrayList<String> totalWords =StringHandling.getWords(string);
-        HashMap<String,Integer> wordCount=StringHandling.getWordsCount(string);
+
+        String[] words=string.split(" ");
+        ArrayList<String> uniqueWords=StringHandling.getUnique(words);
+        ArrayList<String> duplicateWords =StringHandling.getDuplicate(words);
+        ArrayList<String> totalWords =StringHandling.getWords(words);
+        HashMap<String,Integer> wordCount=StringHandling.getWordsCount(words);
         System.out.println(uniqueWords);
         System.out.println(duplicateWords);
         System.out.println(totalWords);
         System.out.println(wordCount);
+        String string2="Hello World My Name is Sai Kumar and I am a Student at University of Missouri Kansas City";
+
+        String[] words2=string2.split(" ");
+        System.out.println(getLongWord(words2));//gets longest word if multiple words get the word which is lexographically small
     }
 }
